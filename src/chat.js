@@ -133,7 +133,6 @@ function connect(c) {
         chatbox.append(header);
         chatbox.append(messages);
 
-        $('#connections').append(chatbox);
 
         // Select connection handler.
         chatbox.on('click', function () {
@@ -165,11 +164,11 @@ function connect(c) {
         c.on('close', function () {
             alert(c.peer + ' has left the chat.');
             chatbox.remove();
-            if ($('.connection').length === 0) {
-                $('.filler').show();
-            }
             delete connectedPeers[c.peer];
         });
+
+
+        $('#connections').append(chatbox);
 
     } else if (c.label === 'file') {
         c.on('data', function (data) {
@@ -207,6 +206,7 @@ $(document).ready(function () {
     }
 
     function getConnection(requestedPeer) {
+        let tmp;
         if (!connectedPeers[requestedPeer]) {
             // Create 2 connections, one labelled chat and another labelled file.
             let c = peer.connect(requestedPeer, {
@@ -214,8 +214,11 @@ $(document).ready(function () {
                 serialization: 'none',
                 metadata: {message: 'hi i want to chat with you!'}
             });
+
+
             c.on('open', function () {
-                connect(c);
+                clearTimeout(tmp);
+                tmp = setTimeout(() => connect(c), 500);
             });
             c.on('error', function (err) {
                 alert(err);

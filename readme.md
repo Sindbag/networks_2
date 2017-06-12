@@ -16,8 +16,3 @@ Test opens N tabs (http://localhost/?id=K , sets peer id) in preferred browser w
 After 6 seconds all connections should be established (according to `connMap` from `src/chat.js`).
 
 To calc minimum press "Calc Min" button in the browser interface.
-
-
-#### Known bugs
-
-Somehow after connection is established there appears 2 chatboxes for one connection.
