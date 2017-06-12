@@ -1,4 +1,4 @@
-## WebRTC (PeerJS) чат
+## WebRTC (PeerJS) chat
 
 PeerJS Chat example updated to work as distributed minimum calculcator
 
